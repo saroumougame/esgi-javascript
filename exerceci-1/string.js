@@ -30,7 +30,14 @@ function snake_case(str){
 
 }
 
-function prop_access(){
+function prop_access(mots){
+
+    let mots = string.split(".");
+
+   mots.forEach(function (el) {
+
+     result += ucfirst(el);
+     return  result;
 
 }
 
@@ -64,10 +71,28 @@ function verlan(str) {
 
 function yoda(str){
 
-
   return str.split(" ").reverse().join(" ");
 
 }
+
+
+  function vig(string, key) {
+     let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+     let string = string.split("");
+     let key = string.split("");
+
+     string.forEach(function (el) {
+         let pos = alphabet.indexOf(el)+1;
+     });
+
+
+     Chiffré[i] = (Texte[i] + Clés[i]) modulo 26
+  }
+
+
+
+
 
 console.log(ucfirst('toto jojo'));
 
@@ -81,5 +106,6 @@ console.log(leet('sridar arou'));
 
 console.log(verlan('sridar arou'));
 
-
 console.log(yoda('sridar arou'));
+
+console.log(vig('sridar arou'));
