@@ -30,25 +30,31 @@ function snake_case(str){
 
 }
 
-function prop_access(mots){
+function prop_access(obj, prop){
+	var newobj = obj;
 
-    let mots = string.split(".");
-
-   mots.forEach(function (el) {
-
-     result += ucfirst(el);
-     return  result;
-
+	var obj_class = newobj.constructor.name;
+	var prop = prop.split(' ');
+	var tab = [];
+	for (var i = 0; i < prop.length ; i++) {
+		newobj = newobj[prop[i]];
+		tab[i] = prop[i];
+		if (typeof newobj === "undefined") {
+			return obj_class + "." + tab.join('.');
+		}
+	}
+	return newobj;
 }
+
 
 function leet(word){
 
-  var lettres = ['a','e','y','u','i','o','z','r','t','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'];
-     var leetTo = ['4','3','7','(_)','1','0','z','r','t','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'];
+  var mots = ['a','e','y','u','i','o','z','r','t','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'];
+     var newMot = ['4','3','7','(_)','1','0','z','r','t','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'];
      toto ="";
      test = [];
-     for(var i = 0; i < lettres.length; i++){
-      test[lettres[i]] = leetTo[i];
+     for(var i = 0; i < mots.length; i++){
+      test[mots[i]] = newMot[i];
      }
 
       for(var i = 0; i < word.length; i++){
@@ -76,19 +82,52 @@ function yoda(str){
 }
 
 
-  function vig(string, key) {
-     let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+function vig(input, key)
+{
+	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	input = input.toUpperCase();
 
-     let string = string.split("");
-     let key = string.split("");
+	// Vérification de la key:
+	if (key == null)
+		key = "";
+	key = key.toUpperCase();
+	var key_long = key.length;
+	var key_correcte = "";
+	for (var i = 0; i < key_long; i ++)
+	{
+		var key_char = alphabet.indexOf (key.charAt (i));
+		if (key_char>-1) {key_correcte += alphabet.charAt (key_char)};
+	}
+	key = key_correcte;
+	key_long = key.length;
+	if (key_long == 0)
+	{
+		key = "a";
+		key_long = 1;
+	}
 
-     string.forEach(function (el) {
-         let pos = alphabet.indexOf(el)+1;
-     });
+	// (Dé)cryptage:
+	output = "";
+	var key_index = 0;
+	var n=0;
+	for (i=0; i< input.length; i ++)
+	{
+	   var input_char = input.charAt (i);
+	   var input_char_value = alphabet.indexOf(input_char);
+	   if (input_char_value>-1)  // ne (dé)chiffre que les 26 lettres majuscules
+		{
 
-
-     Chiffré[i] = (Texte[i] + Clés[i]) modulo 26
-  }
+			input_char_value += alphabet.indexOf(key.charAt(key_index));
+			input_char_value += 26;
+			input_char_value %= 26;
+ 	  		if ((n%5==0) && (n>0)) {output+=" "};
+	 		n++;
+			output += alphabet.charAt(input_char_value);
+			key_index = (key_index+1) % key_long;
+		}
+	}
+	return output;
+}
 
 
 
@@ -108,4 +147,5 @@ console.log(verlan('sridar arou'));
 
 console.log(yoda('sridar arou'));
 
-console.log(vig('sridar arou'));
+console.log(prop_access(new Object(), "test"));
+console.log(vig('sridar arou','lol'));
